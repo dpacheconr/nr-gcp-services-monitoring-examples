@@ -1,0 +1,10 @@
+gcloud functions deploy cloud-functions-java-example \
+   --gen2 \
+   --entry-point app.HelloWorld \
+   --runtime=java17 \
+   --source=. \
+   --trigger-http \
+   --allow-unauthenticated \
+   --memory=512MiB \
+   --update-env-vars JAVA_TOOL_OPTIONS="-javaagent:./target/newrelic/newrelic.jar"
+   
