@@ -1,0 +1,32 @@
+
+id: scalajob
+jobs:
+- sparkJob:
+    args:
+    - TRACEPARENT
+    fileUris:
+    - gs://OUR-bucket/data/test/newrelic.yml
+    jarFileUris:
+    - gs://OUR-bucket/data/test/newrelic.jar
+    - gs://OUR-bucket/data/test/newrelic-api.jar
+    loggingConfig:
+      driverLogLevels:
+        root: DEBUG
+    mainJarFileUri: gs://OUR-bucket/data/test/HelloWorld.jar
+    properties:
+      spark.driver.extraJavaOptions: -javaagent:newrelic.jar
+  stepId: sparkJob
+name: projects/YOURPROJECT/regions/us-central1/workflowTemplates/scalajob
+placement:
+  managedCluster:
+    clusterName: scalajob
+    config:
+      softwareConfig:
+        properties:
+          dataproc:dataproc.allow.zero.workers: 'true'
+
+parameters:
+- name: TRACEPARENT
+  fields:
+  - jobs['sparkJob'].sparkJob.args[0]
+

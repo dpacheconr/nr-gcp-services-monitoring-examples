@@ -1,0 +1,8 @@
+gcloud dataproc workflow-templates import scalajob --source=./template.yml --region=us-central1
+
+gcloud dataproc workflow-templates set-managed-cluster scalajob \
+    --cluster-name=scalajob \
+    --single-node \
+    --region=us-central1  
+
+gcloud dataproc workflow-templates instantiate scalajob --region us-central1 --parameters TRACEPARENT="MYTRACEPARENT"
